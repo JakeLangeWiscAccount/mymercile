@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ProfileForm from './ProfileForm';
 import { useNavigate } from 'react-router-dom';
 import { Button} from "@mui/material";
 import MessageBox from './MessageBox';
@@ -17,6 +16,20 @@ function DirectMessage() {
      navigate('/');
    };
 
+   const [message, setMessage] = useState('');
+
+    const handleMessageChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setMessage(e.target.value);
+    };
+
+    const handleSubmit = () => {
+        // Handle sending message
+        console.log('Message sent:', message);
+        setMessage('');
+        console.log(message);
+    };
+
+    
   return (
     <div>
         <Button sx={{
@@ -31,7 +44,11 @@ function DirectMessage() {
           backgroundColor: 'darkred',
         },
       }} onClick={handleClick}>Home</Button>
-      <MessageBox/>
+      <MessageBox 
+         value={message}
+         onChange={handleMessageChange}
+         onSubmit={handleSubmit}
+      />
     </div>
 
   );

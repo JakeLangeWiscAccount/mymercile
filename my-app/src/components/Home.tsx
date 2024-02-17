@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import HomeCalendar from './HomeCalendar';
 
 
 
@@ -67,7 +68,7 @@ function Home() {
             height: "100vh",
           }}
         >
-          Insert Calendar
+          <HomeCalendar/>
         </Box>
     </div>
 

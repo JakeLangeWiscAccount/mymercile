@@ -1,24 +1,27 @@
-import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 
 
-
-function MessageBox() {
+function MessageBox(props: any) {
 
   return (
-    <div>
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column", // Render elements vertically
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          Insert Chat Box Here for Direct Messages
-        </Box>
-    </div>
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh" // Set minimum height to fill the viewport
+    >
+      <textarea
+        className="chat-box-input"
+        placeholder="Type your message..."
+        value={props.value}
+        onChange={props.onChange}
+      />
+      <button className="send-button" onClick={props.onSubmit}>
+        Send
+      </button>
+      </Box>
+
   );
 }
 

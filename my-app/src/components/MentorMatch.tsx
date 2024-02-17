@@ -32,9 +32,6 @@ function MentorMatch() {
         },
       }} onClick={handleClick}>Home</Button>
       <MatchFrame/>
-      <Button variant="contained" style={{ backgroundColor: 'black', color: 'white' }}>
-        Send Match Request
-      </Button>
     </div>
 
   );
