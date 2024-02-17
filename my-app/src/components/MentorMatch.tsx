@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import ProfileForm from './ProfileForm';
 import { useNavigate } from 'react-router-dom';
 import { Button} from "@mui/material";
+import MatchFrame from './MatchFrame';
 
 
 
 
 
-function Profile() {
+function MentorMatch() {
 
  
    const navigate = useNavigate();
@@ -15,7 +16,6 @@ function Profile() {
    const handleClick = () => {
      navigate('/');
    };
-
 
   return (
     <div>
@@ -31,10 +31,10 @@ function Profile() {
           backgroundColor: 'darkred',
         },
       }} onClick={handleClick}>Home</Button>
-        <ProfileForm/>
+      <MatchFrame/>
     </div>
 
   );
 }
 
-export default Profile;
+export default MentorMatch;

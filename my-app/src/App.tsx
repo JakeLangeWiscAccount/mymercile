@@ -6,6 +6,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from './components/Profile';
 import Home from './components/Home';
+import MentorMatch from './components/MentorMatch';
+import DirectMessage from './components/DirectMessage';
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/mentor" element={<MentorMatch />} />
+        <Route path="/message" element={<DirectMessage />} />
       </Routes>
     </BrowserRouter>
   );

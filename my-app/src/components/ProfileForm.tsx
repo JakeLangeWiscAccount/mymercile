@@ -38,7 +38,6 @@ function UserForm() {
     setFlamingoChecked(false);
     setBadgerChecked(false);
 
-
     setSubmitted(true); 
   };
 
