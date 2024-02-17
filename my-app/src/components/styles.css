@@ -1,0 +1,16 @@
+.swiper-container {
+    width: 300px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .swiper-slide {
+    background-color: #f0f0f0; /* Slide background color */
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  
