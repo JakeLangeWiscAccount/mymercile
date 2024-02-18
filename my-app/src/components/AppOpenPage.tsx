@@ -5,8 +5,12 @@ import { useNavigate } from "react-router-dom";
 const AppOpenPage = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/");
+  const loginClick = () => {
+    navigate("/login");
+  };
+
+  const registrationClick = () => {
+     navigate("/registration");
   };
 
   return (
@@ -19,16 +23,16 @@ const AppOpenPage = () => {
         height: "100vh",
       }}
     >
-    <div style={{ marginBottom: "8px" }}>
-      <Button variant="contained" color="primary">
-        Login
-      </Button>
+      <div style={{ marginBottom: "8px" }}>
+        <Button onClick={loginClick} variant="contained" color="primary">
+          Login
+        </Button>
       </div>
       <div style={{ marginTop: "8px" }}>
-      <Button variant="contained" color="primary">
-        Register
-      </Button>
-    </div>
+        <Button onClick={registrationClick} variant="contained" color="primary">
+          Register
+        </Button>
+      </div>
     </Box>
   );
 };
