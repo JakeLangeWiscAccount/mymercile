@@ -1,0 +1,17 @@
+{
+  "name": "mymercileapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.6",
+    "express": "^4.18.2",
+    "supabase": "^1.142.2"
+  }
+}
