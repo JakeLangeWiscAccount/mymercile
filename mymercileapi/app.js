@@ -5,7 +5,7 @@ import { getCourses, modifyCourses, createCourses } from './courses.js';
 import { createInterests, getInterests } from './interests.js';
 import { createProfile, getProfile } from './profile.js';
 const app = express('mymercile')
-const port = 3000
+const port = 3001
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,7 +20,7 @@ app.post('/login', async (req, res) => {
     const data = req.body
     var response = await signInWithEmail(data.email, data.password)
     session = response.content.user
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin','Content-Type', 'application/json');
     res.status(response.status).send(JSON.stringify(response))
   } catch (err) {
     res.status(500).send(err.message)

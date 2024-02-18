@@ -1,13 +1,11 @@
 import { Box } from "@mui/system";
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 const RegistrationPage = () => {
-
   const navigate = useNavigate();
-
-  
 
   //create user name and password
 
@@ -16,24 +14,50 @@ const RegistrationPage = () => {
   const [confirmedPassword, setConfirmedPassword] = useState<string>("");
   const [registrationFailed, setRegistrationFailed] = useState<boolean>(false);
 
-  const profileFormSubmitHandler = async(e: { preventDefault: () => void }) => {
+  const postURL = "//localhost:3001/registration";
+
+  const profileFormSubmitHandler = async (e: {
+    preventDefault: () => void;
+  }) => {
     e.preventDefault();
     // Handle form submission logic here (e.g., send data to server)
     console.log("Submitted:", {
-       username, password
+      username,
+      password,
     });
 
-    if (confirmedPassword == password){
+    if (confirmedPassword == password) {
+      
+      try {
+        console.log(username);
+        console.log(password);
+        const response = await axios.post(postURL, {
+          //add fields here in correct order
+          email: username,
+          password: password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+        console.log(response);
+        console.log('Response:', response.data);
+        // Handle response if needed
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle error if needed
+      }
+      
+      
       navigate("/home");
-    }else{
+    } else {
       setRegistrationFailed(true);
       setUsername("");
       setPassword("");
       setConfirmedPassword("");
     }
-    
   };
-
 
   return (
     <div>
@@ -47,7 +71,7 @@ const RegistrationPage = () => {
             height: "100vh",
           }}
         >
-            Please Login
+          Please Login
           <label>
             Username:
             <input
@@ -56,7 +80,6 @@ const RegistrationPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </label>
-
           <label>
             Password:
             <input
@@ -75,9 +98,8 @@ const RegistrationPage = () => {
           </label>
           <button type="submit">Submit</button>
           {registrationFailed && <div>Registration Failed! Try Again!</div>}
-          </Box>
-          
-          </form>
+        </Box>
+      </form>
     </div>
   );
 };
