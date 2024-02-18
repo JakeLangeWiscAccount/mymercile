@@ -1,5 +1,6 @@
 import express from 'express';
 import {signInWithEmail, signUpNewUser, signOut} from './authentication.js'
+import { createCalendar, getCalendar } from './calendar.js';
 import { getCourses, modifyCourses, createCourses } from './courses.js';
 import { createInterests, getInterests } from './interests.js';
 import { createProfile, getProfile } from './profile.js';
@@ -127,3 +128,23 @@ app.get('/interests', async (req, res) => {
   }
 })
 
+app.post('/addcalendar', async (req, res) => {
+  try {
+    const data = req.body
+    var response = await createCalendar(data, session)
+    res.setHeader('Content-Type', 'application/json')
+    res.status(response.status).send(JSON.stringify(response))
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
+
+app.get('/calendar', async (req, res) => {
+  try {
+    var response = await getCalendar(session);
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(response))
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
