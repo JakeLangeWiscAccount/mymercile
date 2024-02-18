@@ -19,7 +19,7 @@ app.post('/login', async (req, res) => {
     const data = req.body
     var response = await signInWithEmail(data.email, data.password)
     session = response.content.user
-    res.setHeader('Access-Control-Allow-Origin','Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
     res.status(response.status).send(JSON.stringify(response))
   } catch (err) {
     res.status(500).send(err.message)

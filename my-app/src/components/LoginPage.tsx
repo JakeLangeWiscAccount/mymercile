@@ -14,6 +14,7 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loginFailed, setLoginFailed] = useState<boolean>(false);
 
   const postURL = "//localhost:3001/login";
 
@@ -34,20 +35,23 @@ const LoginPage = () => {
       },
       {
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000/',
           'Content-Type': 'application/x-www-form-urlencoded',
         }
       });
       console.log(response);
       console.log('Response:', response.data);
+      navigate("/home");
       // Handle response if needed
     } catch (error) {
       console.error('Error:', error);
       // Handle error if needed
+      setUsername("");
+      setPassword("");
+      setLoginFailed(true);
     }
 
     // if login success (get response matches login variables), proceed
-    navigate("/home");
+    //navigate("/home");
 
   };
 
@@ -83,6 +87,7 @@ const LoginPage = () => {
             />
           </label>
           <button type="submit">Submit</button>
+          {loginFailed && <div>Login Failed! Try Again!</div>}
           </Box>
           
           </form>

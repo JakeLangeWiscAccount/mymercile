@@ -43,14 +43,19 @@ const RegistrationPage = () => {
         });
         console.log(response);
         console.log('Response:', response.data);
+        navigate("/home");
         // Handle response if needed
       } catch (error) {
         console.error('Error:', error);
+        setUsername("");
+        setPassword("");
+        setConfirmedPassword("");
+        setRegistrationFailed(true);
         // Handle error if needed
       }
       
       
-      navigate("/home");
+      //navigate("/home");
     } else {
       setRegistrationFailed(true);
       setUsername("");

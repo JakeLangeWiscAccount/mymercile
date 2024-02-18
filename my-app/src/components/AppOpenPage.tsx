@@ -10,7 +10,7 @@ const AppOpenPage = () => {
   };
 
   const registrationClick = () => {
-     navigate("/registration");
+    navigate("/registration");
   };
 
   return (
@@ -23,7 +23,10 @@ const AppOpenPage = () => {
         height: "100vh",
       }}
     >
-      <div style={{ marginBottom: "8px" }}>
+      <div style={{marginBottom: "8px"}}>
+        <h1>MyMercile</h1>
+      </div>
+      <div style={{ marginBottom: "8px", marginTop: "8px" }}>
         <Button onClick={loginClick} variant="contained" color="primary">
           Login
         </Button>
