@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/system/Box";
 import { Checkbox } from "@mui/material";
 import axios from "axios";
@@ -19,10 +19,43 @@ function UserForm() {
 
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const postURL = "";
+  const postURL = "//localhost:3001/createprofile";
 
 
-  const profileFormSubmitHandler = async(e: { preventDefault: () => void }) => {
+  const[retrievedName, setRetrievedName] = useState<string>("");
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("//localhost:3001/profile");
+        //console.log(response.data[response.data.Content.len]);
+        console.log("here");
+        console.log(response.data.content[response.data.content.length-1])
+        const data = response.data.content[response.data.content.length-1]
+        setRetrievedName(data.first_name + " " + data.last_name);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        //setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function
+    return () => {
+      // Cleanup code if needed
+    };
+  }, [submitted]);
+
+
+
+
+  const profileFormSubmitHandler = async (e: {
+    preventDefault: () => void;
+  }) => {
     e.preventDefault();
     // Handle form submission logic here (e.g., send data to server)
     console.log("Submitted:", {
@@ -39,15 +72,60 @@ function UserForm() {
       classFour,
       classFive,
     });
+    const firstName = name.split(" ")[0];
+    const secondName = name.split(" ")[1];
+
+    const cohort = flamingoChecked ? "flamingo" : "badger";
 
     try {
-      const response = await axios.post(postURL, {
-        //add fields here in correct order
-      });
-      console.log('Response:', response.data);
+      const response = await axios.post(
+        postURL,
+        {
+          //add fields here in correct order
+          first_name: firstName,
+          last_name: secondName,
+          email: "",
+          major: major,
+          hometown: hometown,
+          cohort: cohort,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      console.log(response);
+      console.log("Response:", response.data);
+
       // Handle response if needed
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
+      // Handle error if needed
+    }
+
+    //email: session.email,
+    // course: course_data.course,
+    const postCourseURL = "//localhost:3001/addcourse";
+    try {
+      const response = await axios.post(
+        postCourseURL,
+        {
+          //add fields here in correct order
+          email: "",
+          course: classOne,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      console.log(response);
+      console.log("Response:", response.data);
+      // Handle response if needed
+    } catch (error) {
+      console.error("Error:", error);
       // Handle error if needed
     }
 
@@ -69,9 +147,6 @@ function UserForm() {
     setSubmitted(true);
   };
 
-
-
-
   const badgerCheckHandler = () => {
     if (badgerChecked) {
       setBadgerChecked(false);
@@ -92,6 +167,22 @@ function UserForm() {
 
   return (
     <div>
+      <div
+        style={{
+          position: 'absolute',
+          top: '0',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          textAlign: 'center'
+        }}
+      >
+        <h1>Current Profile Information</h1>
+      <div>
+        <p>Name: {retrievedName}</p>
+        <p>Year In School: {major}</p>
+        <p>Major: </p>
+      </div>
+      </div>
       <form onSubmit={profileFormSubmitHandler}>
         <Box
           sx={{
