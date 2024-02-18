@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/system/Box";
 import { Checkbox } from "@mui/material";
+import axios from "axios";
 
 function UserForm() {
   const [name, setName] = useState<string>("");
@@ -15,14 +16,41 @@ function UserForm() {
   const [classThree, setClassThree] = useState<string>("");
   const [classFour, setClassFour] = useState<string>("");
   const [classFive, setClassFive] = useState<string>("");
-  
+
   const [submitted, setSubmitted] = useState<boolean>(false);
 
+  const postURL = "";
 
-  const profileFormSubmitHandler = (e: { preventDefault: () => void }) => {
+
+  const profileFormSubmitHandler = async(e: { preventDefault: () => void }) => {
     e.preventDefault();
     // Handle form submission logic here (e.g., send data to server)
-    console.log("Submitted:", { name, yearInSchool, major, hometown, badgerChecked, flamingoChecked, interests, classOne, classTwo, classThree, classFour, classFive });
+    console.log("Submitted:", {
+      name,
+      yearInSchool,
+      major,
+      hometown,
+      badgerChecked,
+      flamingoChecked,
+      interests,
+      classOne,
+      classTwo,
+      classThree,
+      classFour,
+      classFive,
+    });
+
+    try {
+      const response = await axios.post(postURL, {
+        //add fields here in correct order
+      });
+      console.log('Response:', response.data);
+      // Handle response if needed
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error if needed
+    }
+
     // Reset form fields
     setName("");
     setYearInSchool("");
@@ -38,26 +66,29 @@ function UserForm() {
     setFlamingoChecked(false);
     setBadgerChecked(false);
 
-    setSubmitted(true); 
+    setSubmitted(true);
   };
 
+
+
+
   const badgerCheckHandler = () => {
-    if (badgerChecked){
+    if (badgerChecked) {
       setBadgerChecked(false);
-    }else{
+    } else {
       setBadgerChecked(true);
       setFlamingoChecked(false);
     }
-  }
+  };
 
   const flamingoCheckHandler = () => {
-    if (flamingoChecked){
+    if (flamingoChecked) {
       setFlamingoChecked(false);
-    }else{
+    } else {
       setFlamingoChecked(true);
       setBadgerChecked(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -110,16 +141,16 @@ function UserForm() {
           <label>
             Badger
             <Checkbox
-                checked={badgerChecked}
-                onChange={badgerCheckHandler}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
+              checked={badgerChecked}
+              onChange={badgerCheckHandler}
+              inputProps={{ "aria-label": "controlled" }}
+            />
             Flamingo
             <Checkbox
-                checked={flamingoChecked}
-                onChange={flamingoCheckHandler}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
+              checked={flamingoChecked}
+              onChange={flamingoCheckHandler}
+              inputProps={{ "aria-label": "controlled" }}
+            />
           </label>
 
           <label>
